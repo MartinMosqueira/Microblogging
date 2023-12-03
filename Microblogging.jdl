@@ -1,0 +1,46 @@
+application {
+  config {
+    baseName Microblogging
+    applicationType monolith
+    packageName app.project.microblogging
+    buildTool maven,
+    devDatabaseType postgresql,
+    prodDatabaseType postgresql,
+    authenticationType jwt,
+    testFrameworks [cypress],
+    clientTheme sketchy,
+    languages [es,en],
+    nativeLanguage es,
+    enableSwaggerCodegen true,
+    clientFramework vue
+  }
+  entities *
+}
+
+entity ApplicationUser {
+  fechaNacimiento LocalDate
+  telefono Long
+}
+
+relationship OneToOne {
+  ApplicationUser to User with builtInEntity
+}
+
+
+relationship ManyToMany{
+	ApplicationUser{contacto} to ApplicationUser{userC}
+}
+
+relationship ManyToMany{
+	ApplicationUser{seguido} to ApplicationUser{userS}
+}
+
+entity MensajeMuro{
+mensaje String
+fecha Instant
+tags String
+}
+
+relationship OneToMany{
+	ApplicationUser{mensaje} to MensajeMuro{user}
+}

@@ -1,0 +1,30 @@
+{
+  "applications": ["Microblogging"],
+  "changelogDate": "20231203162035",
+  "entityTableName": "mensaje_muro",
+  "fields": [
+    {
+      "fieldName": "mensaje",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fecha",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "String"
+    }
+  ],
+  "name": "MensajeMuro",
+  "relationships": [
+    {
+      "otherEntityName": "applicationUser",
+      "otherEntityRelationshipName": "mensaje",
+      "relationshipName": "user",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

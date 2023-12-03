@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "Microblogging",
+    "buildTool": "maven",
+    "clientFramework": "vue",
+    "clientTheme": "sketchy",
+    "devDatabaseType": "postgresql",
+    "devServerPort": 9060,
+    "enableSwaggerCodegen": true,
+    "entities": ["ApplicationUser", "MensajeMuro"],
+    "jhipsterVersion": "8.0.0",
+    "jwtSecretKey": "MTZiNmI4MWY2YTM4OTIyOTYyZWQ1ZjI3Mzk1MzMzNjJiMDNhYjFhMzUzODQzNTdlZTE2NDZiYzM3NWZmMmUwMDdkMmM2MDExODUwMDY0ZDQ0ZjZkYTljNDU5ZjQ3ZmU0MDhmMjkxMjdjMzhiZjQ4OTdjNDg5ZmZiNzVmOTQ3YTg=",
+    "languages": ["es", "en"],
+    "lastLiquibaseTimestamp": 1701620435000,
+    "nativeLanguage": "es",
+    "packageFolder": "app/project/microblogging",
+    "packageName": "app.project.microblogging",
+    "prodDatabaseType": "postgresql",
+    "testFrameworks": ["cypress"]
+  }
+}

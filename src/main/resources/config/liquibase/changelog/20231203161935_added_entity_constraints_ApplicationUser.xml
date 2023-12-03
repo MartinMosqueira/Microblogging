@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity ApplicationUser.
+    -->
+    <changeSet id="20231203161935-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="application_user"
+                                 constraintName="fk_application_user__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="application_user_id"
+                                 baseTableName="rel_application_user__contacto"
+                                 constraintName="fk_rel_application_user__contacto__application_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contacto_id"
+                                 baseTableName="rel_application_user__contacto"
+                                 constraintName="fk_rel_application_user__contacto__contacto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="application_user_id"
+                                 baseTableName="rel_application_user__seguido"
+                                 constraintName="fk_rel_application_user__seguido__application_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="seguido_id"
+                                 baseTableName="rel_application_user__seguido"
+                                 constraintName="fk_rel_application_user__seguido__seguido_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_user"
+                                 />
+    </changeSet>
+</databaseChangeLog>

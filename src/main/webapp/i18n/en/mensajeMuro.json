@@ -1,0 +1,27 @@
+{
+  "microbloggingApp": {
+    "mensajeMuro": {
+      "home": {
+        "title": "Mensaje Muros",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mensaje Muro",
+        "createOrEditLabel": "Create or edit a Mensaje Muro",
+        "notFound": "No Mensaje Muros found"
+      },
+      "created": "A new Mensaje Muro is created with identifier { param }",
+      "updated": "A Mensaje Muro is updated with identifier { param }",
+      "deleted": "A Mensaje Muro is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Mensaje Muro { id }?"
+      },
+      "detail": {
+        "title": "Mensaje Muro"
+      },
+      "id": "ID",
+      "mensaje": "Mensaje",
+      "fecha": "Fecha",
+      "tags": "Tags",
+      "user": "User"
+    }
+  }
+}
