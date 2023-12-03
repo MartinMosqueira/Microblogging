@@ -1,6 +1,7 @@
 package app.project.microblogging.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 import app.project.microblogging.IntegrationTest;
 import app.project.microblogging.domain.User;
