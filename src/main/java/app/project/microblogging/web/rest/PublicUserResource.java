@@ -1,7 +1,11 @@
 package app.project.microblogging.web.rest;
 
+import app.project.microblogging.config.Constants;
+import app.project.microblogging.security.AuthoritiesConstants;
 import app.project.microblogging.service.UserService;
+import app.project.microblogging.service.dto.AdminUserDTO;
 import app.project.microblogging.service.dto.UserDTO;
+import jakarta.validation.constraints.Pattern;
 import java.util.*;
 import java.util.Collections;
 import org.slf4j.Logger;
@@ -12,9 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -61,5 +67,10 @@ public class PublicUserResource {
     @GetMapping("/authorities")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
+    }
+
+    @GetMapping("/users/{login}")
+    public ResponseEntity<AdminUserDTO> getUser(@PathVariable String login) {
+        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
     }
 }

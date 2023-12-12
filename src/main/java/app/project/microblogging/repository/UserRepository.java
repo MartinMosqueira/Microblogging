@@ -1,9 +1,11 @@
 package app.project.microblogging.repository;
 
+import app.project.microblogging.domain.Authority;
 import app.project.microblogging.domain.User;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;

@@ -2,12 +2,16 @@ package app.project.microblogging.web.rest;
 
 import app.project.microblogging.domain.ApplicationUser;
 import app.project.microblogging.repository.ApplicationUserRepository;
+import app.project.microblogging.service.ApplicationUserService;
+import app.project.microblogging.service.dto.ApplicationUserDTO;
+import app.project.microblogging.service.dto.UserDTO;
 import app.project.microblogging.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +38,11 @@ public class ApplicationUserResource {
 
     private final ApplicationUserRepository applicationUserRepository;
 
-    public ApplicationUserResource(ApplicationUserRepository applicationUserRepository) {
+    private final ApplicationUserService applicationUserService;
+
+    public ApplicationUserResource(ApplicationUserRepository applicationUserRepository, ApplicationUserService applicationUserService) {
         this.applicationUserRepository = applicationUserRepository;
+        this.applicationUserService = applicationUserService;
     }
 
     /**
@@ -183,5 +190,58 @@ public class ApplicationUserResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<ApplicationUserDTO> getApplicationUserByIdController(@PathVariable Long id) {
+        log.debug("REST request to get ApplicationUser : {}", id);
+        ApplicationUserDTO applicationUserDTO = applicationUserService.getApplicationUserByIdService(id);
+        return ResponseEntity.ok().body(applicationUserDTO);
+    }
+
+    //ENDPOINTS CONTACTOS
+
+    @GetMapping("/contacts/{userId}")
+    public ResponseEntity<Set<UserDTO>> getApplicationUserContactsController(@PathVariable Long userId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        Set<UserDTO> userDTOSet = applicationUserService.getApplicationUserContactsService(userId);
+        return ResponseEntity.ok().body(userDTOSet);
+    }
+
+    @PostMapping("/contacts/{userId}/{contactoId}")
+    public ResponseEntity<Void> addContactoController(@PathVariable Long userId, @PathVariable Long contactoId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        applicationUserService.addContactoService(userId, contactoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/contacts/{userId}/{contactoId}")
+    public ResponseEntity<Void> deleteContactoController(@PathVariable Long userId, @PathVariable Long contactoId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        applicationUserService.deleteContactoService(userId, contactoId);
+        return ResponseEntity.ok().build();
+    }
+
+    //ENDPOINTS SEGUIDOS
+
+    @GetMapping("/seguidos/{userId}")
+    public ResponseEntity<Set<UserDTO>> getApplicationUserSeguidosController(@PathVariable Long userId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        Set<UserDTO> userDTOSet = applicationUserService.getApplicationUserSeguidosService(userId);
+        return ResponseEntity.ok().body(userDTOSet);
+    }
+
+    @PostMapping("/seguidos/{userId}/{seguidoId}")
+    public ResponseEntity<Void> addSeguidoController(@PathVariable Long userId, @PathVariable Long seguidoId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        applicationUserService.addSeguidoService(userId, seguidoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/seguidos/{userId}/{seguidoId}")
+    public ResponseEntity<Void> deleteSeguidoController(@PathVariable Long userId, @PathVariable Long seguidoId) {
+        log.debug("REST request to get ApplicationUser : {}", userId);
+        applicationUserService.deleteSeguidoService(userId, seguidoId);
+        return ResponseEntity.ok().build();
     }
 }

@@ -27,4 +27,10 @@ public interface ApplicationUserRepository extends ApplicationUserRepositoryWith
     default Page<ApplicationUser> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    Optional<ApplicationUser> findApplicationUserById(Long id);
+
+    Optional<ApplicationUser> findWithContactosById(Long id);
+
+    Optional<ApplicationUser> findWithSeguidosById(Long id);
 }
