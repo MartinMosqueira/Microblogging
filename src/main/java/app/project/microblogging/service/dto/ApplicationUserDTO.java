@@ -1,12 +1,7 @@
 package app.project.microblogging.service.dto;
 
-import app.project.microblogging.domain.Authority;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public class ApplicationUserDTO {
 
