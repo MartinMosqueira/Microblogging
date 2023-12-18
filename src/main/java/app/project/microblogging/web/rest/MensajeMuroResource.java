@@ -54,7 +54,14 @@ public class MensajeMuroResource {
         MensajeMuro result = mensajeMuroRepository.save(mensajeMuro);
         return ResponseEntity
             .created(new URI("/api/mensaje-muros/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(
+                HeaderUtil.createEntityCreationAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    (result.getId() != null) ? result.getId().toString() : "Id is null"
+                )
+            )
             .body(result);
     }
 
