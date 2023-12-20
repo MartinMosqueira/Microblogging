@@ -13,6 +13,7 @@ export default defineConfig({
   env: {
     authenticationUrl: '/api/authenticate',
     jwtStorageName: 'jhi-authenticationToken',
+    baseUrl: 'http://localhost:8080',
   },
   e2e: {
     // We've imported your old cypress plugins here.
