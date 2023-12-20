@@ -126,3 +126,11 @@ declare global {
 import 'cypress-audit/commands';
 // Convert this to a module instead of script (allows import/export)
 export {};
+
+Cypress.Commands.add('login', (username, password) => {
+  cy.get('.navbar-dropdown-menu > .no-bold').click();
+  cy.get('[data-cy="login"] > span').click();
+  cy.get('[data-cy="username"]').type(username);
+  cy.get('[data-cy="password"]').type(password);
+  cy.get('.btn').click();
+});
