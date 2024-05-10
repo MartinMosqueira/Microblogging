@@ -199,6 +199,13 @@ public class ApplicationUserResource {
         return ResponseEntity.ok().body(applicationUserDTO);
     }
 
+    @GetMapping("/user/login/{login}")
+    public ResponseEntity<ApplicationUserDTO> getApplicationUserByLoginUserController(@PathVariable String login) {
+        log.debug("REST request to get ApplicationUser : {}", login);
+        ApplicationUserDTO applicationUserDTO = applicationUserService.getApplicationUserByLoginUserService(login);
+        return ResponseEntity.ok().body(applicationUserDTO);
+    }
+
     //ENDPOINTS CONTACTOS
 
     @GetMapping("/contacts/{userId}")

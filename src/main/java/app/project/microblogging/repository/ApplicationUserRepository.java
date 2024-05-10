@@ -33,4 +33,5 @@ public interface ApplicationUserRepository extends ApplicationUserRepositoryWith
     Optional<ApplicationUser> findWithContactosById(Long id);
 
     Optional<ApplicationUser> findWithSeguidosById(Long id);
+    Optional<ApplicationUser> findApplicationUserByUserLogin(String login);
 }

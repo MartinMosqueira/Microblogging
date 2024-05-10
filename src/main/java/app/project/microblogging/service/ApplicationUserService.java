@@ -56,6 +56,34 @@ public class ApplicationUserService {
         return applicationUserDTO;
     }
 
+    public ApplicationUserDTO getApplicationUserByLoginUserService(String login) {
+        ApplicationUserDTO applicationUserDTO = new ApplicationUserDTO();
+
+        Optional<ApplicationUser> applicationUserOptional = applicationUserRepository.findApplicationUserByUserLogin(login);
+        if (applicationUserOptional.isPresent()) {
+            ApplicationUser applicationUser = applicationUserOptional.get();
+
+            applicationUserDTO.setId(applicationUser.getId());
+            applicationUserDTO.setFirstName(applicationUser.getUser().getFirstName());
+            applicationUserDTO.setLastName(applicationUser.getUser().getLastName());
+            applicationUserDTO.setEmail(applicationUser.getUser().getEmail());
+            applicationUserDTO.setLogin(applicationUser.getUser().getLogin());
+            applicationUserDTO.setFechaNacimiento(applicationUser.getFechaNacimiento());
+            applicationUserDTO.setTelefono(applicationUser.getTelefono());
+
+            List<String> authorityNames = applicationUser
+                .getUser()
+                .getAuthorities()
+                .stream()
+                .map(Authority::getName)
+                .collect(Collectors.toList());
+
+            applicationUserDTO.setAuthorities(authorityNames);
+        }
+
+        return applicationUserDTO;
+    }
+
     //ENDPOINTS CONTACTOS
     public Set<UserDTO> getApplicationUserContactsService(Long userId) {
         Optional<ApplicationUser> applicationUser = applicationUserRepository.findWithContactosById(userId);
