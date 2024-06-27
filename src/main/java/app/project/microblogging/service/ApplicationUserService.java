@@ -32,9 +32,7 @@ public class ApplicationUserService {
 
         Optional<ApplicationUser> applicationUserOptional = applicationUserRepository.findApplicationUserById(id);
 
-        if (applicationUserOptional.isPresent()) {
-            ApplicationUser applicationUser = applicationUserOptional.get();
-
+        applicationUserOptional.ifPresent(applicationUser -> {
             applicationUserDTO.setId(applicationUser.getId());
             applicationUserDTO.setFirstName(applicationUser.getUser().getFirstName());
             applicationUserDTO.setLastName(applicationUser.getUser().getLastName());
@@ -51,7 +49,7 @@ public class ApplicationUserService {
                 .collect(Collectors.toList());
 
             applicationUserDTO.setAuthorities(authorityNames);
-        }
+        });
 
         return applicationUserDTO;
     }
@@ -60,9 +58,8 @@ public class ApplicationUserService {
         ApplicationUserDTO applicationUserDTO = new ApplicationUserDTO();
 
         Optional<ApplicationUser> applicationUserOptional = applicationUserRepository.findApplicationUserByUserLogin(login);
-        if (applicationUserOptional.isPresent()) {
-            ApplicationUser applicationUser = applicationUserOptional.get();
 
+        applicationUserOptional.ifPresent(applicationUser -> {
             applicationUserDTO.setId(applicationUser.getId());
             applicationUserDTO.setFirstName(applicationUser.getUser().getFirstName());
             applicationUserDTO.setLastName(applicationUser.getUser().getLastName());
@@ -79,7 +76,7 @@ public class ApplicationUserService {
                 .collect(Collectors.toList());
 
             applicationUserDTO.setAuthorities(authorityNames);
-        }
+        });
 
         return applicationUserDTO;
     }
