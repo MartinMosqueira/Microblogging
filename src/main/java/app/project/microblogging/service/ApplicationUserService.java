@@ -98,22 +98,29 @@ public class ApplicationUserService {
     }
 
     public void addContactoService(Long userId, Long contactoId) {
-        Optional<ApplicationUser> applicationUser = applicationUserRepository.findWithContactosById(userId);
-        Optional<ApplicationUser> contacto = applicationUserRepository.findApplicationUserById(contactoId);
-
-        if (applicationUser.isPresent() && contacto.isPresent()) {
-            applicationUser.get().getContactos().add(contacto.get());
-            applicationUserRepository.save(applicationUser.get());
-        }
+        applicationUserRepository
+            .findWithContactosById(userId)
+            .ifPresent(applicationUser -> {
+                applicationUserRepository
+                    .findApplicationUserById(contactoId)
+                    .ifPresent(contacto -> {
+                        applicationUser.getContactos().add(contacto);
+                        applicationUserRepository.save(applicationUser);
+                    });
+            });
     }
 
     public void deleteContactoService(Long userId, Long contactoId) {
-        Optional<ApplicationUser> applicationUser = applicationUserRepository.findWithContactosById(userId);
-        Optional<ApplicationUser> contacto = applicationUserRepository.findApplicationUserById(contactoId);
-        if (applicationUser.isPresent() && contacto.isPresent()) {
-            applicationUser.get().getContactos().remove(contacto.get());
-            applicationUserRepository.save(applicationUser.get());
-        }
+        applicationUserRepository
+            .findWithContactosById(userId)
+            .ifPresent(applicationUser -> {
+                applicationUserRepository
+                    .findApplicationUserById(contactoId)
+                    .ifPresent(contacto -> {
+                        applicationUser.getContactos().remove(contacto);
+                        applicationUserRepository.save(applicationUser);
+                    });
+            });
     }
 
     //ENDPOINTS SEGUIDOS
@@ -134,20 +141,28 @@ public class ApplicationUserService {
     }
 
     public void addSeguidoService(Long userId, Long seguidoId) {
-        Optional<ApplicationUser> applicationUser = applicationUserRepository.findWithSeguidosById(userId);
-        Optional<ApplicationUser> seguido = applicationUserRepository.findApplicationUserById(seguidoId);
-        if (applicationUser.isPresent() && seguido.isPresent()) {
-            applicationUser.get().getSeguidos().add(seguido.get());
-            applicationUserRepository.save(applicationUser.get());
-        }
+        applicationUserRepository
+            .findWithSeguidosById(userId)
+            .ifPresent(applicationUser -> {
+                applicationUserRepository
+                    .findApplicationUserById(seguidoId)
+                    .ifPresent(contacto -> {
+                        applicationUser.getSeguidos().add(contacto);
+                        applicationUserRepository.save(applicationUser);
+                    });
+            });
     }
 
     public void deleteSeguidoService(Long userId, Long seguidoId) {
-        Optional<ApplicationUser> applicationUser = applicationUserRepository.findWithSeguidosById(userId);
-        Optional<ApplicationUser> seguido = applicationUserRepository.findApplicationUserById(seguidoId);
-        if (applicationUser.isPresent() && seguido.isPresent()) {
-            applicationUser.get().getSeguidos().remove(seguido.get());
-            applicationUserRepository.save(applicationUser.get());
-        }
+        applicationUserRepository
+            .findWithSeguidosById(userId)
+            .ifPresent(applicationUser -> {
+                applicationUserRepository
+                    .findApplicationUserById(seguidoId)
+                    .ifPresent(contacto -> {
+                        applicationUser.getSeguidos().remove(contacto);
+                        applicationUserRepository.save(applicationUser);
+                    });
+            });
     }
 }
