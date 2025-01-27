@@ -1,0 +1,34 @@
+# Etapa 1: Construcción
+FROM jhipster/jhipster:v8.4.0 AS build
+
+USER root
+
+RUN apt-get update && apt-get install -y git chromium-browser && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN git clone https://github.com/MartinMosqueira/Microblogging.git
+
+WORKDIR /app/Microblogging
+
+# Limpieza previa y instalación de dependencias
+RUN rm -rf node_modules package-lock.json && \
+    npm cache clean --force && \
+    rm -rf /root/.npm/_npx/* && \
+    npm install && \
+    ./mvnw package -Pprod -DskipTests
+
+# Etapa 2: Ejecución
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copia solo el archivo JAR desde la etapa anterior
+COPY --from=build /app/Microblogging/target/*.jar app.jar
+
+# Exponer el puerto de la aplicación
+EXPOSE 8080
+
+# Definir el comando para iniciar la aplicación
+CMD ["java", "-jar", "app.jar"]

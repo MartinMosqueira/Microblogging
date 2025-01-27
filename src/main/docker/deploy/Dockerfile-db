@@ -1,0 +1,10 @@
+FROM postgres:16.1
+
+EXPOSE 5432
+
+VOLUME /var/lib/postgresql/data
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=1234
+
+RUN echo "CREATE DATABASE microbloggingstorage;" > /docker-entrypoint-initdb.d/init.sql
